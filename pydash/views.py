@@ -22,15 +22,15 @@
 import json
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render_to_response
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.shortcuts import render
+from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse
 from django.template import RequestContext
 
-from settings import (TIME_JS_REFRESH, TIME_JS_REFRESH_LONG,
+from pydash.settings import (TIME_JS_REFRESH, TIME_JS_REFRESH_LONG,
                       TIME_JS_REFRESH_NET, _VERSION)
-import services
-import urls
+import pydash.services
+import pydash.urls
 
 
 def get_pydash_urls():
@@ -58,12 +58,11 @@ def index(request):
 
     """
     pydash_urls = get_pydash_urls()
-    return render_to_response('main.html', {'time_refresh': TIME_JS_REFRESH,
+    return render(request, 'main.html', {'time_refresh': TIME_JS_REFRESH,
                                             'time_refresh_long': TIME_JS_REFRESH_LONG,
                                             'time_refresh_net': TIME_JS_REFRESH_NET,
                                             'version': _VERSION,
-                                            'pydashUrls': pydash_urls},
-                              context_instance=RequestContext(request))
+                                            'pydashUrls': pydash_urls})
 
 
 @login_required(login_url=reverse_lazy('login'))
