@@ -29,8 +29,8 @@ from django.template import RequestContext
 
 from pydash.settings import (TIME_JS_REFRESH, TIME_JS_REFRESH_LONG,
                       TIME_JS_REFRESH_NET, _VERSION)
-import pydash.services
-import pydash.urls
+from pydash import services
+from pydash import urls
 
 
 def get_pydash_urls():
